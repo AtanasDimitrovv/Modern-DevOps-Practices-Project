@@ -1,7 +1,3 @@
-# Complete the service kubernetes file for this project
-
-# Path: service.yml
-
 apiVersion: v1
 kind: Service
 metadata:
