@@ -32,7 +32,7 @@ jobs:
         with:
           context: .
           dockerfile: Dockerfile
-          push: true
+          push: false
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/spring-boot:latesttag
 
       - name: Login to DockerHub
@@ -46,7 +46,7 @@ jobs:
         with:
           context: .
           dockerfile: Dockerfile
-          push: false
+          push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/spring-boot:latesttag
 
 #      - name: Start Minikube
