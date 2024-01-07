@@ -16,6 +16,6 @@ spec:
       spec:
         containers:
           - name: spring-boot
-            image: ${{ secrets.DOCKER_HUB_USERNAME }}/spring-boot:latest
+            image: atanasgd/spring-boot:latest
             ports:
               - containerPort: 8080
