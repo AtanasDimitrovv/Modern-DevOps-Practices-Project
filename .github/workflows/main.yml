@@ -47,16 +47,16 @@ jobs:
           context: .
           dockerfile: Dockerfile
           push: false
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/spring-boot:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/spring-boot:latesttag
 
-      - name: Start Minikube
-        uses: medyagh/setup-minikube@master
+#      - name: Start Minikube
+#        uses: medyagh/setup-minikube@master
 
-      - name: Test Minikube
-        run: kubectl get pods -A
+#      - name: Test Minikube
+#        run: kubectl get pods -A
 
-      - name: Deploy to Minikube
-        run: kubectl apply -f deployment.yml
+#      - name: Deploy to Minikube
+#        run: kubectl apply -f deployment.yml
 
-      - name: Test service
-        run: minikube service list
+#      - name: Test service
+#        run: minikube service list
