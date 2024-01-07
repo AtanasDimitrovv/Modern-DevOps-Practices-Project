@@ -32,7 +32,7 @@ jobs:
         with:
           context: .
           dockerfile: Dockerfile
-          push: false
+          push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/spring-boot:latest
 
       - name: Login to DockerHub
@@ -48,3 +48,15 @@ jobs:
           dockerfile: Dockerfile
           push: false
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/spring-boot:latest
+
+      - name: Start Minikube
+        uses: medyagh/setup-minikube@master
+
+      - name: Test Minikube
+        run: kubectl get pods -A
+
+      - name: Deploy to Minikube
+        run: kubectl apply -f deployment.yml
+
+      - name: Test service
+        run: minikube service list
