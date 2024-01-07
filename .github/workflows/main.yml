@@ -58,5 +58,8 @@ jobs:
       - name: Deploy to Minikube
         run: kubectl apply -f deployment.yml
 
+      - name: Start Service
+        run: kubectl apply -f service.yml
+
       - name: Test service
         run: minikube service list
