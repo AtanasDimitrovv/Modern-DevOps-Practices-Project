@@ -106,7 +106,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/spring-boot:latesttag
 
-  deploy to minikube:
+  deploy-to-minikube:
     name: Deploy to Minikube
     runs-on: ubuntu-latest
     needs: [create-and-push-docker-image]
