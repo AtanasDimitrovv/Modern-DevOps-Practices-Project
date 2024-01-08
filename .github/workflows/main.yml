@@ -29,8 +29,8 @@ jobs:
     name: Trivy Scan
     runs-on: ubuntu-latest
     needs: [lint-check]
-    steps:
 
+    steps:
       - name: Checkout
         uses: actions/checkout@v3
 
@@ -63,10 +63,11 @@ jobs:
           vuln-type: os,library
           severity: 'CRITICAL'
 
-  build-deploy:
-    name: Build and Deploy
+  build:
+    name: Build
     runs-on: ubuntu-latest
     needs: [trivy-scan]
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -85,14 +86,12 @@ jobs:
           mvn clean 
           mvn -B package --file pom.xml
 
-      - name: Build Docker Image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          dockerfile: Dockerfile
-          push: false
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/spring-boot:latesttag
+  create-and-push-docker-image:
+    name: Create and Push Docker Image
+    runs-on: ubuntu-latest
+    needs: [build]
 
+    steps:
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
@@ -107,6 +106,11 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/spring-boot:latesttag
 
+  deploy to minikube:
+    name: Deploy to Minikube
+    runs-on: ubuntu-latest
+    needs: [create-and-push-docker-image]
+    steps:
       - name: Start Minikube
         uses: medyagh/setup-minikube@master
 
