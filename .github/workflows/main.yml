@@ -19,6 +19,8 @@ jobs:
         uses: github/super-linter@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUBB_TOKEN }}
+          FILTER_REGEX_EXCLUDE: .*mvn*
+          IGNORE_GITIGNORED_FILES: true
 
   build-deploy:
     name: Build and Deploy
