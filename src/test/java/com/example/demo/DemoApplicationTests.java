@@ -5,9 +5,17 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class DemoApplicationTests {
-
 	@Test
-	void contextLoads() {
+	void testTwoIntegersAreEqual() {
+		int a = 1;
+		int b = 1;
+		assert(a == b);
 	}
 
+	@Test
+	void testTwoStringsAreEqual() {
+		String a = "Hello";
+		String b = "Hello";
+		assert(a.equals(b));
+	}
 }
