@@ -20,7 +20,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUBB_TOKEN }}
           reporter: github-check
-          level: info
+          level: warning
           checkstyle_config: google_checks.xml
           workdir: ./src/main/java
 
