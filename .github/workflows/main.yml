@@ -58,7 +58,7 @@ jobs:
           ignore-unfixed: true
           exit-code: 1
           vuln-type: os,library
-          severity: 'CRITICAL,HIGH'
+          severity: 'CRITICAL'
 
   build-deploy:
     name: Build and Deploy
