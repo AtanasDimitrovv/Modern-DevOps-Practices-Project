@@ -3,8 +3,8 @@ name: Build and Deploy Spring app
 
 on:
   push:
-      branches:
-        - main
+    branches:
+      - main
 
 jobs:
   run-lint:
@@ -18,7 +18,7 @@ jobs:
       - name: Lint Code Base
         uses: github/super-linter@v4
         env:
-            GITHUB_TOKEN: ${{ secrets.GITHUBB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUBB_TOKEN }}
 
   build-deploy:
     name: Build and Deploy
