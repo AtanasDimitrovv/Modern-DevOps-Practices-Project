@@ -23,6 +23,7 @@ jobs:
           level: error
           checkstyle_config: google_checks.xml
           workdir: ./src/main/java
+          filter_mode: file
 
   run-lint:
     name: Lint Code Base
