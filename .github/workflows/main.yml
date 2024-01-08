@@ -25,10 +25,27 @@ jobs:
           FILTER_REGEX_EXCLUDE: ".*mvn*|.*src*|.*github*"
           IGNORE_GITIGNORED_FILES: true
 
+  local-tests:
+    name: Local Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'corretto'
+
+      - name: Unit Tests
+        run: mvn -B test --file pom.xml
+
   trivy-scan:
     name: Trivy Scan
     runs-on: ubuntu-latest
-    needs: [lint-check]
+    needs: [lint-check, local-tests]
 
     steps:
       - name: Checkout
@@ -51,12 +68,12 @@ jobs:
           context: .
           dockerfile: Dockerfile
           push: false
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/spring-boot:latesttag
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/spring-boot:latest
 
       - name: Trivy Scan
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: ${{ secrets.DOCKER_HUB_USERNAME }}/spring-boot:latesttag
+          image-ref: ${{ secrets.DOCKER_HUB_USERNAME }}/spring-boot:latest
           format: table
           ignore-unfixed: true
           exit-code: 1
@@ -78,9 +95,6 @@ jobs:
           java-version: 17
           distribution: 'corretto'
 
-      - name: Unit Tests
-        run: mvn -B test --file pom.xml
-
       - name: Build with Maven
         run: |
           mvn clean 
@@ -98,7 +112,7 @@ jobs:
           context: .
           dockerfile: Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/spring-boot:latesttag
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/spring-boot:latest
 
   deploy-to-minikube:
     name: Deploy to Minikube
