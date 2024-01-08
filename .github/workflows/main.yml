@@ -22,6 +22,22 @@ jobs:
           FILTER_REGEX_EXCLUDE: ".*mvn*|.*src*|.*github*"
           IGNORE_GITIGNORED_FILES: true
 
+  run-sast:
+    name: Sonar Cloud Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Sonar Cloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        with:
+          #organization: ${{ secrets.SONARCLOUD_ORG }}
+          #project: ${{ secrets.SONARCLOUD_PROJECT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUBB_TOKEN }}
+          token: ${{ secrets.SONAR_TOKEN }}
+
   build-deploy:
     name: Build and Deploy
     runs-on: ubuntu-latest
