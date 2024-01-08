@@ -23,7 +23,7 @@ jobs:
           level: error
           checkstyle_config: google_checks.xml
           workdir: ./src/main/java
-          filter_mode: file
+          filter_mode: diff_context
 
   run-lint:
     name: Lint Code Base
