@@ -1,8 +1,9 @@
+---
 name: Build and Deploy Spring app
 
 on:
   push:
-    branches:
+      branches:
         - main
 
 jobs:
