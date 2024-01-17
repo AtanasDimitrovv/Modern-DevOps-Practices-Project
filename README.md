@@ -32,8 +32,9 @@ To run this application locally with Docker:
 
 1. Install Docker
 2. Clone this repository
-3. docker build -f Dockerfile .
-4. docker run -p 8080:8080 \<image-name\>
+3. mvn clean install
+4. docker build -f Dockerfile .
+5. docker run -p 8080:8080 \<image-name\>
 
 # Run Locally with Minikube
 
